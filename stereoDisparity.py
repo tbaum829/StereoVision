@@ -146,13 +146,5 @@ print("Calculating disparity map took {0:.2f} min.\n".format(elapsed / 60.0))
 # =========================================
 
 print("Displaying disparity map...")
-
-# Display the disparity map.
-# Passing an empty matrix as the second argument tells imshow to take the
-# minimum and maximum values of the data and map the data range to the
-# display colors.
 plt.imshow(DbasicSubpixel, cmap="inferno")
-
-# Set the title to display.
-plt.title("Basic block matching, Sub-px acc., Search right, Block size = " + str(blockSize))
-plt.show()
+plt.savefig('stereoDisparity.png', )
