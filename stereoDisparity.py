@@ -40,6 +40,8 @@ rightI = np.mean(right, axis=2)
 # DbasicSubpixel will hold the result of the block matching.
 # The values will be 'single' precision (32-bit) floating point.
 DbasicSubpixel = np.zeros(np.shape(leftI), dtype='float32')
+worse = np.zeros(np.shape(leftI), dtype='float32')
+
 
 # The disparity range defines how many pixels away from the block's location
 # in the first image to search for a matching block in the other image.
@@ -108,6 +110,9 @@ for m in range(imgHeight):
         # of indices.
         #
         # Get the index of the closest - matching block.
+        if m%50 == 0 and n%200 == 0:
+            plt.plot(blockDiffs)
+            plt.show()
         bestMatchIndex = np.argmin(blockDiffs)
 
         # Convert the index of this block back into an offset.
@@ -132,6 +137,8 @@ for m in range(imgHeight):
             # We're estimating the subpixel location of the true best match.
             DbasicSubpixel[m, n] = d - (0.5 * (C3 - C1) / (C1 - (2 * C2) + C3))
 
+        worse[m, n] = d
+
     # Update progress every 10th row.
     if m % 10 == 0:
         print("  Image row {0:d} / {1:d} {2:.2f}%".format(m, imgHeight, (m / imgHeight) * 100))
@@ -148,3 +155,5 @@ print("Calculating disparity map took {0:.2f} min.\n".format(elapsed / 60.0))
 print("Displaying disparity map...")
 plt.imshow(DbasicSubpixel, cmap="inferno")
 plt.savefig('stereoDisparity.png', )
+plt.imshow(worse, cmap="inferno")
+plt.savefig('worse.png', )
