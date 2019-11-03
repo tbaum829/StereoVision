@@ -1,82 +1,78 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 INTMAX = 99999999
 
 
 def get_patches(image):
-    height, width, depth = image.shape
-    patches = np.zeros((height-2, width-2, 3, 3, depth))
-    for x in range(1, height-1):
-        for y in range(1, width-1):
-            patches[x-1][y-1] = image[x-1:x+2, y-1:y+2, :]
+    height, width = image.shape
+    patches = np.zeros((height-2, width-2, 5, 5))
+    for x in range(2, height-2):
+        for y in range(2, width-2):
+            patches[x-1][y-1] = image[x-2:x+3, y-2:y+3]
     return patches
 
 
 class PatchMatch:
-    def __init__(self, left_path='left.png', right_path='left.png', output_path='patchMatch.png'):
+    def __init__(self, left_path='left.png', right_path='right.png', output_path='patchMatch.png'):
         self.output_path = output_path
 
         self.left_img = plt.imread(left_path)
         self.right_img = plt.imread(right_path)
 
-        # self.left_grey = np.mean(self.left_img, axis=2)
-        # self.right_grey = np.mean(self.right_img, axis=2)
-        self.imgHeight, self.imgWidth, self.imgDepth = np.shape(self.left_img)
+        self.left_grey = np.mean(self.left_img, axis=2)
+        self.right_grey = np.mean(self.right_img, axis=2)
+        self.imgHeight, self.imgWidth = np.shape(self.right_grey)
 
-        self.left_patches = get_patches(self.left_img)
-        self.right_patches = get_patches(self.right_img)
+        self.left_patches = get_patches(self.left_grey)
+        self.right_patches = get_patches(self.right_grey)
         self.offsets = self.initialize_offsets()
-        self.new_offsets = np.empty_like(self.offsets)
+        self.new_offsets = self.offsets.copy()
 
     def initialize_offsets(self):
-        offsets = np.zeros((self.imgHeight-2, self.imgWidth-2, 2), dtype=int)
-        for x in range(self.imgHeight-2):
-            for y in range(self.imgWidth-2):
-                x_rand = np.random.randint(0, self.imgHeight-2)
-                y_rand = np.random.randint(0, self.imgWidth-2)
-                offsets[x][y] = np.array([x_rand-x, y_rand-y])
-        return offsets
+        offsets = np.zeros((self.right_patches.shape[0], self.right_patches.shape[1]), dtype=int).T
+        for i, row in enumerate(offsets[:-1]):
+            row += np.random.randint(0, high=min(self.right_patches.shape[1]-i-1, 50), size=row.shape)
+        return offsets.T
 
     def patch_distance_error(self, x, y, offset):
-        x_offset, y_offset = offset
-        if x+x_offset < 0 or \
-                x+x_offset >= self.right_patches.shape[0] or \
-                y+y_offset < 0 or \
-                y+y_offset >= self.right_patches.shape[1]:
+        if y+offset >= self.right_patches.shape[1]:
             return INTMAX
-        left_patch = self.left_patches[x][y]
-        right_patch = self.right_patches[x+x_offset][y+y_offset]
-        distance_error = np.sum(np.abs(left_patch-right_patch))
+        right_patch = self.right_patches[x][y]
+        left_patch = self.left_patches[x][y+offset]
+        distance_error = np.sum(np.square(right_patch-left_patch))
         return distance_error
 
     def propagate_patch(self, x, y):
-        offset_args = [self.offsets[x][y], self.offsets[x-1][y], self.offsets[x][y-1]]
+        offset_args = [self.offsets[x][y],
+                       self.offsets[x-1][y],
+                       self.offsets[x][y-1],
+                       self.offsets[x+1][y],
+                       self.offsets[x][y+1]]
         distance_errors = [self.patch_distance_error(x, y, offset_arg) for offset_arg in offset_args]
         best_offset = offset_args[int(np.argmin(distance_errors))]
         self.new_offsets[x][y] = best_offset
 
     def propagate(self):
-        for x in np.arange(1, np.shape(self.left_patches)[0]):
-            for y in np.arange(1, np.shape(self.left_patches)[1]):
+        for x in np.arange(1, np.shape(self.right_patches)[0]-1):
+            for y in np.arange(1, np.shape(self.right_patches)[1]-1):
                 self.propagate_patch(x, y)
-        self.offsets = self.new_offsets
+        self.offsets = self.new_offsets.copy()
 
     def random_search(self):
-        x_radius, y_radius = int((self.imgHeight-2)/2), int((self.imgWidth-2)/2)
-        while x_radius > 0 and y_radius > 0:
+        radius = 50
+        while radius > 0:
             for x, row in enumerate(self.offsets):
-                for y, offset in enumerate(row):
-                    curr_x, curr_y = offset[0], offset[1]
-                    new_x = np.random.randint(max(0, x+curr_x-x_radius), min(self.imgHeight-2, x+curr_x+x_radius))-x
-                    new_y = np.random.randint(max(0, y+curr_y-y_radius), min(self.imgWidth-2, y+curr_y+y_radius))-y
-                    if self.patch_distance_error(x, y, offset) > self.patch_distance_error(x, y, [new_x, new_y]):
-                        offset[0], offset[1] = new_x, new_y
-            x_radius, y_radius = int(x_radius/2), int(y_radius/2)
+                for y, offset in enumerate(row[:-1]):
+                    new_offset = np.random.randint(max(0, offset-radius),
+                                                   high=min(self.right_patches.shape[1]-y-1, 50, offset+radius))
+                    if self.patch_distance_error(x, y, offset) > self.patch_distance_error(x, y, new_offset):
+                        self.offsets[x][y] = new_offset
+            radius = int(radius/4)
 
-    def visualize(self):
-        print("Displaying disparity map...")
-        plt.imshow(self.offsets[:, :, 1], cmap="inferno")
+    def visualize(self, outfile='patchMatch.png'):
+        plt.imshow(np.abs(self.offsets), cmap="inferno")
         plt.savefig('patchMatch.png')
 
     def train(self, iterations):
@@ -89,6 +85,15 @@ class PatchMatch:
 
 
 if __name__ == "__main__":
+    # Start a timer
+    tic = time.process_time()
+
+    # Calculate Map
     patch_match = PatchMatch()
-    patch_match.train(1)
+    patch_match.train(4)
     patch_match.visualize()
+
+    # Display compute time.
+    toc = time.process_time()
+    elapsed = toc - tic
+    print("Calculating disparity map took {0:.2f} min.\n".format(elapsed / 60.0))

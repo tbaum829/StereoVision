@@ -2,35 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
+# Start a timer
+tic = time.process_time()
+
 # Read the two images
 left = plt.imread('left.png')
 right = plt.imread('right.png')
-
-# ===================================
-#       Display Composite Image
-# ===================================
-
-# Create a composite image out of the two stereo images.
-leftRed = left[:, :, :2]
-
-# Take the green and blue color channels from the right image.
-rightGreenBlue = right[:, :, 2:]
-
-# Combine the above channels into a single composite image using the 'cat'
-# function, which concatenates the matrices along dimension '3'.
-composite = np.concatenate((leftRed, rightGreenBlue), axis=2)
-
-# Show the composite image.
-# plt.imshow(composite)
-# plt.show()
-
-
-# ====================================
-#        Basic Block Matching
-# ====================================
-
-# Start a timer
-tic = time.process_time()
 
 # Convert the images from RGB to grayscale by
 # averaging the three color channels.
@@ -132,25 +109,14 @@ for m in range(imgHeight):
             DbasicSubpixel[m, n] = d - (0.5 * (C3 - C1) / (C1 - (2 * C2) + C3))
 
     # Update progress every 10th row.
-    print("  Image row {0:d} / {1:d} {2:.2f}%".format(m, imgHeight, (m / imgHeight) * 100))
+    if m % 10 == 0:
+        print("  Image row {0:d} / {1:d} {2:.2f}%".format(m, imgHeight, (m / imgHeight) * 100))
 
 # Display compute time.
 toc = time.process_time()
 elapsed = toc - tic
 print("Calculating disparity map took {0:.2f} min.\n".format(elapsed / 60.0))
 
-# =========================================
-#        Visualize Disparity Map
-# =========================================
-
-print("Displaying disparity map...")
-
-# Display the disparity map.
-# Passing an empty matrix as the second argument tells imshow to take the
-# minimum and maximum values of the data and map the data range to the
-# display colors.
+# Display the Disparity Map
 plt.imshow(DbasicSubpixel, cmap="inferno")
-
-# Set the title to display.
-plt.title("Basic block matching, Sub-px acc., Search right, Block size = " + str(blockSize))
-plt.show()
+plt.savefig('classicStereo.png', )
