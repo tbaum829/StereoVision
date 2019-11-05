@@ -26,13 +26,21 @@ class PatchMatch:
         self.left_patches = get_patches(self.left_grey)
         self.right_patches = get_patches(self.right_grey)
         self.offsets = self.initialize_offsets()
-        self.new_offsets = self.offsets.copy()
+        self.best_distances = self.initialize_distances()
 
     def initialize_offsets(self):
         offsets = np.zeros((self.right_patches.shape[0], self.right_patches.shape[1]), dtype=int).T
-        for i, row in enumerate(offsets[:-1]):
-            row += np.random.randint(0, high=min(self.right_patches.shape[1]-i-1, 50), size=row.shape)
+        for i, row in enumerate(offsets[:-70]):
+            random_array = np.random.randint(0, high=min(self.right_patches.shape[1]-i-1, 50), size=row.shape)
+            row += random_array
         return offsets.T
+
+    def initialize_distances(self):
+        best_distances = np.zeros((self.offsets.shape[0], self.offsets.shape[1]))
+        for x, row in enumerate(self.offsets):
+            for y, offset in enumerate(row):
+                best_distances[x][y] = self.patch_distance_error(x, y, offset)
+        return best_distances
 
     def patch_distance_error(self, x, y, offset):
         if y+offset >= self.right_patches.shape[1]:
@@ -43,27 +51,38 @@ class PatchMatch:
         return distance_error
 
     def propagate_patch(self, x, y):
-        offset_args = [self.offsets[x][y],
-                       self.offsets[x-1][y],
-                       self.offsets[x][y-1]]
-        distance_errors = [self.patch_distance_error(x, y, offset_arg) for offset_arg in offset_args]
+        current_offset = self.offsets[x][y]
+        current_distance = self.best_distances[x][y]
+        above_offset = self.offsets[x-1][y]
+        above_distance = self.patch_distance_error(x, y, above_offset)
+        left_offset = self.offsets[x][y-1]
+        left_distance = self.patch_distance_error(x, y, left_offset)
+        distance_errors = [current_distance, above_distance, left_distance]
+        offset_args = [current_offset, above_offset, left_offset]
+        best_distance = min(distance_errors)
         best_offset = offset_args[int(np.argmin(distance_errors))]
         self.offsets[x][y] = best_offset
+        self.best_distances[x][y] = best_distance
 
     def propagate(self):
-        for x in np.arange(1, np.shape(self.right_patches)[0]-1):
-            for y in np.arange(1, np.shape(self.right_patches)[1]-1):
+        for x in np.arange(1, np.shape(self.right_patches)[0]):
+            for y in np.arange(1, np.shape(self.right_patches)[1]-70):
                 self.propagate_patch(x, y)
 
     def random_search(self):
         radius = 50
         while radius > 0:
             for x, row in enumerate(self.offsets):
-                for y, offset in enumerate(row[:-1]):
+                for y, offset in enumerate(row[:-70]):
+                    current_distance = self.best_distances[x][y]
+                    if current_distance < 0.2:
+                        continue
                     new_offset = np.random.randint(max(0, offset-radius),
                                                    high=min(self.right_patches.shape[1]-y-1, 50, offset+radius))
-                    if self.patch_distance_error(x, y, offset) > self.patch_distance_error(x, y, new_offset):
+                    new_distance = self.patch_distance_error(x, y, new_offset)
+                    if current_distance > new_distance:
                         self.offsets[x][y] = new_offset
+                        self.best_distances[x][y] = new_distance
             radius = int(radius/4)
 
     def visualize(self, outfile='patchMatch.png'):
@@ -77,7 +96,6 @@ class PatchMatch:
             self.propagate()
             print("Searching...")
             self.random_search()
-            self.visualize()
 
 
 if __name__ == "__main__":
@@ -87,9 +105,10 @@ if __name__ == "__main__":
     # Calculate Map
     patch_match = PatchMatch()
     patch_match.train(1)
-    patch_match.visualize()
 
     # Display compute time.
     toc = time.process_time()
+
+    patch_match.visualize()
     elapsed = toc - tic
     print("Calculating disparity map took {0:.2f} min.\n".format(elapsed / 60.0))
