@@ -30,8 +30,9 @@ class PatchMatch:
 
     def initialize_offsets(self):
         offsets = np.zeros((self.right_patches.shape[0], self.right_patches.shape[1]), dtype=int).T
-        for i, row in enumerate(offsets[:-1]):
-            row += np.random.randint(0, high=min(self.right_patches.shape[1]-i-1, 50), size=row.shape)
+        for x in range(125, 251):
+            for y in range(200, 301):
+                offsets[x][y] += np.random.randint(0, high=min(self.right_patches.shape[1]-x-1, 50))
         return offsets.T
 
     def patch_distance_error(self, x, y, offset):
@@ -51,22 +52,24 @@ class PatchMatch:
         self.offsets[x][y] = best_offset
 
     def propagate(self):
-        for x in np.arange(1, np.shape(self.right_patches)[0]-1):
-            for y in np.arange(1, np.shape(self.right_patches)[1]-1):
+        for x in np.arange(201, 301):
+            for y in np.arange(126, 250):
                 self.propagate_patch(x, y)
 
     def random_search(self):
         radius = 50
         while radius > 0:
-            for x, row in enumerate(self.offsets):
-                for y, offset in enumerate(row[:-1]):
-                    new_offset = np.random.randint(max(0, offset-radius),
-                                                   high=min(self.right_patches.shape[1]-y-1, 50, offset+radius))
-                    if self.patch_distance_error(x, y, offset) > self.patch_distance_error(x, y, new_offset):
+            for x in np.arange(200, 301):
+                for y in np.arange(125, 251):
+                    new_offset = np.random.randint(max(0, self.offsets[x][y]-radius),
+                                                   high=min(self.right_patches.shape[1]-y-1, 50,
+                                                            self.offsets[x][y]+radius))
+                    if self.patch_distance_error(x, y, self.offsets[x][y]) > \
+                            self.patch_distance_error(x, y, new_offset):
                         self.offsets[x][y] = new_offset
             radius = int(radius/4)
 
-    def visualize(self, outfile='patchMatch.png'):
+    def visualize(self, outfile='patchMatch2_sample.png'):
         plt.imshow(self.offsets, cmap="inferno")
         plt.savefig(outfile)
 
@@ -77,7 +80,6 @@ class PatchMatch:
             self.propagate()
             print("Searching...")
             self.random_search()
-            self.visualize()
 
 
 if __name__ == "__main__":
@@ -86,7 +88,7 @@ if __name__ == "__main__":
 
     # Calculate Map
     patch_match = PatchMatch()
-    patch_match.train(1)
+    patch_match.train(4)
     patch_match.visualize()
 
     # Display compute time.
