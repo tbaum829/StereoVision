@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6284e3b7-6b67-4281-b64e-b0ef16a8ad25" name="Default Changelist" comment="">
+    <list default="true" id="6284e3b7-6b67-4281-b64e-b0ef16a8ad25" name="Default Changelist" comment="Started Paper">
+      <change afterPath="$PROJECT_DIR$/classicStereo_sample.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.tex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patchMatch_sample.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patchMatch_sample.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/references.bib" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classicStereo2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classicStereo2_sample.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/patchMatch.png" beforeDir="false" afterPath="$PROJECT_DIR$/patchMatch.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch.py" beforeDir="false" afterPath="$PROJECT_DIR$/patchMatch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch2_sample.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +32,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -162,10 +161,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.patchMatch_sample" />
-        <item itemvalue="Python.patchMatch2_sample" />
-        <item itemvalue="Python.classicStereo2_sample" />
         <item itemvalue="Python.patchMatch" />
         <item itemvalue="Python.classicStereo" />
+        <item itemvalue="Python.patchMatch2_sample" />
+        <item itemvalue="Python.classicStereo2_sample" />
       </list>
     </recent_temporary>
   </component>
@@ -215,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572969138794</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="progress">
+      <created>1572976268991</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1572976268991</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -237,6 +243,8 @@
     <MESSAGE value="good start" />
     <MESSAGE value="working for padding of 50" />
     <MESSAGE value="working and faster" />
-    <option name="LAST_COMMIT_MESSAGE" value="working and faster" />
+    <MESSAGE value="progress" />
+    <MESSAGE value="Started Paper" />
+    <option name="LAST_COMMIT_MESSAGE" value="Started Paper" />
   </component>
 </project>
