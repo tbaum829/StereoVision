@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6284e3b7-6b67-4281-b64e-b0ef16a8ad25" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classicStereo_sample.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch_sample.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch_sample.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -227,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573072315911</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fixed pixel by pixel implementation">
+      <created>1573095659964</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1573095659964</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -251,6 +253,7 @@
     <MESSAGE value="working and faster" />
     <MESSAGE value="progress" />
     <MESSAGE value="Started Paper" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started Paper" />
+    <MESSAGE value="Fixed pixel by pixel implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed pixel by pixel implementation" />
   </component>
 </project>
