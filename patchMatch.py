@@ -50,7 +50,7 @@ class PatchMatch:
         distance_error = np.sum(np.square(right_patch-left_patch))
         return distance_error
 
-    def propagate_patch(self, x, y):
+    def propagate_down(self, x, y):
         current_offset = self.offsets[x][y]
         current_distance = self.best_distances[x][y]
         above_offset = self.offsets[x-1][y]
@@ -59,6 +59,20 @@ class PatchMatch:
         left_distance = self.patch_distance_error(x, y, left_offset)
         distance_errors = [current_distance, above_distance, left_distance]
         offset_args = [current_offset, above_offset, left_offset]
+        best_distance = min(distance_errors)
+        best_offset = offset_args[int(np.argmin(distance_errors))]
+        self.offsets[x][y] = best_offset
+        self.best_distances[x][y] = best_distance
+
+    def propagate_up(self, x, y):
+        current_offset = self.offsets[x][y]
+        current_distance = self.best_distances[x][y]
+        below_offset = self.offsets[x+1][y]
+        below_distance = self.patch_distance_error(x, y, below_offset)
+        right_offset = self.offsets[x][y+1]
+        right_distance = self.patch_distance_error(x, y, right_offset)
+        distance_errors = [current_distance, below_distance, right_distance]
+        offset_args = [current_offset, below_offset, right_offset]
         best_distance = min(distance_errors)
         best_offset = offset_args[int(np.argmin(distance_errors))]
         self.offsets[x][y] = best_offset
@@ -80,13 +94,23 @@ class PatchMatch:
 
     def train(self, iterations):
         for i in range(1, iterations+1):
-            for x, row in enumerate(self.offsets):
-                for y, offset in enumerate(row[:-70]):
-                    self.propagate_patch(x, y)
-                    self.random_search(x, y)
-                if x % 10 == 0:
-                    print("  Image row {0:d} / {1:d} {2:.2f}%".format(x, self.imgHeight, (x / self.imgHeight) * 100))
-                    self.visualize('aloeOut.png')
+            print("Iteration", i)
+            if i % 2 == 1:
+                for x, row in enumerate(self.offsets):
+                    for y, offset in enumerate(row[:-70]):
+                        self.propagate_down(x, y)
+                        self.random_search(x, y)
+                    if x % 10 == 0:
+                        print("  Image row {0:d} / {1:d} {2:.2f}%".format(x, self.imgHeight,
+                                                                          (x / self.imgHeight) * 100))
+            else:
+                for x, row in enumerate(self.offsets):
+                    for y, offset in enumerate(row[:-70]):
+                        self.propagate_up(self.offsets.shape[0]-2-x, self.offsets.shape[1]-71-y)
+                        self.random_search(self.offsets.shape[0]-2-x, self.offsets.shape[1]-71-y)
+                    if x % 10 == 0:
+                        print("  Image row {0:d} / {1:d} {2:.2f}%".format(x, self.imgHeight,
+                                                                          (x / self.imgHeight) * 100))
 
 
 if __name__ == "__main__":

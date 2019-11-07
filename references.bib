@@ -1,51 +1,3 @@
-@article{luo2016efficient,
-  abstract = {In the past year, convolutional neural networks have been shown to perform extremely well for stereo estimation. However, current architectures rely on siamese networks which exploit concatenation followed by further processing layers, requiring a minute of GPU computation per image pair. In contrast, in this paper we propose a matching network which is able to produce very accurate results in less than a second of GPU computation. Towards this goal,we exploit a product layer which simply computes the inner product between the two representations of a siamese architecture. We train our network by treating the problem as multi-class classification, where the classes are all possible disparities. This allows us to get calibrated scores, which result in much better matching performance when compared to existing approaches.},
-  author = {Luo, Wenjie and Schwing, Alexander G. and Urtasun, Raquel},
-  journal = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-  number = {1},
-  pages = {5695-5703},
-  title = {Efficient Deep Learning for Stereo Matching},
-  volume = {1},
-  year = {2016},
-  note = {291 citations},
-  url = {https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Luo_Efficient_Deep_Learning_CVPR_2016_paper.pdf}
-}
-@article{yao2018mvsnet,
-  abstract = {We present an end-to-end deep learning architecture for depth map inference from multi-view images. In the network, we first extract deep visual image features, and then build the 3D cost volume upon the reference camera frustum via the differentiable homography warping. Next, we apply 3D convolutions to regularize and regress the initial depth map, which is then refined with the reference image to generate the final output. Our framework flexibly adapts arbitrary N-view inputs using a variance-based cost metric that maps multiple features into one cost feature. The proposed method is demonstrated on the large-scale DTU dataset. With simple post-processing, MVSNet not only significantly outperforms previous state-of-the-arts, but also is several times faster in runtime. In the end, we also show the generalization power of MVSNet on the complex outdoor Tanks and Temples dataset, which has not been used to train the network.},
-  author = {Yao, Yao and Luo, Zixin and Li, Shiwei and Fang, Tian and Quan, Long},
-  journal = {The European Conference on Computer Vision (ECCV)},
-  number = {2},
-  pages = {767-783},
-  title = {MVSNet: Depth Inference for Unstructured Multi-view Stereo},
-  volume = {1},
-  year = {2018},
-  note = {28 citations},
-  url = {http://openaccess.thecvf.com/content_ECCV_2018/papers/Yao_Yao_MVSNet_Depth_Inference_ECCV_2018_paper.pdf}
-}
-@article{yu2017single,
-  abstract = {This paper presents a unified grammatical framework capable of reconstructing a variety of scene types (e.g., urban, campus, country etc.) from a single input image. The key idea of our approach is to study a novel commonsense reasoning framework that mainly exploits two types of prior knowledge: (i) prior distributions over a single dimension of objects, e.g., that the length of a sedan is about 4.5 meters; (ii) pair-wise relationships between the dimensions of scene entities, e.g., that the length of a sedan is shorter than a bus. These unary or relative geometric knowledge, once extracted, are fairly stable across different types of natural scenes, and are informative for enhancing the understanding of various scenes in both 2D images and 3D world. Methodologically, we propose to construct a hierarchical graph representation as a unified representation of the input image and related geometric knowledge. We formulate these objectives with a unified probabilistic formula and develop a data-driven Monte Carlo method to infer the optimal solution with both bottom-to-up and top-down computations. Results with comparisons on public datasets showed that our method clearly outperforms the alternative methods.},
-  author = {Yu, Chengcheng and Liu, Xiaobai and Zhu, Song-Chun},
-  journal = {International Joint Conference on Artificial Intelligence (IJCAI)},
-  number = {3},
-  pages = {4655-4661},
-  title = {Single-Image 3D Scene Parsing Using Geometric Commonsense.},
-  volume = {1},
-  year = {2017},
-  note = {1 citation},
-  url = {http://www.stat.ucla.edu/~sczhu/papers/Conf_2017/IJCAI2017_Geometric_Commonsense.pdf}
-}
-@article{duggal2019deeppruner,
-  abstract = {Our goal is to significantly speed up the runtime of current state-of-the-art stereo algorithms to enable real-time inference. Towards this goal, we developed a differentiable PatchMatch module that allows us to discard most disparities without requiring full cost volume evaluation. We then exploit this representation to learn which range to prune for each pixel. By progressively reducing the search space and effectively propagating such information, we are able to efficiently compute the cost volume for high likelihood hypotheses and achieve savings in both memory and computation. Finally, an image guided refinement module is exploited to further improve the performance. Since all our components are differentiable, the full network can be trained end-to-end. Our experiments show that our method achieves competitive results on KITTI and SceneFlow datasets while running in real-time at 62ms.},
-  author = {Duggal, Shivam and Wang, Shenlong and Ma, Wei-Chiu and Hu, Rui and Urtasun, Raquel},
-  journal = {International Conference on Computer Vision (ICCV)},
-  number = {5},
-  pages = {4321-4330},
-  title = {DeepPruner: Learning Efficient Stereo Matching via Differentiable PatchMatch},
-  volume = {1},
-  year = {2019},
-  note = {0 citations},
-  url = {http://www.cs.toronto.edu/~slwang/deeppruner.pdf}
-}
 @article{barnes2009patchmatch,
   abstract = {This paper presents interactive image editing tools using a new randomized algorithm for quickly finding approximate nearest neighbor matches between image patches. Previous research in graphics and vision has leveraged such nearest-neighbor searches to provide a variety of high-level digital image editing tools. However, the cost of computing a field of such matches for an entire image has eluded previous efforts to provide interactive performance. Our algorithm offers substantial performance improvements over the previous state of the art (20-100x), enabling its use in interactive editing tools. The key insights driving the algorithm are that some good patch matches can be found via random sampling, and that natural coherence in the imagery allows us to propagate such matches quickly to surrounding areas. We offer theoretical analysis of the convergence properties of the algorithm, as well as empirical and practical evidence for its high quality and performance. This one simple algorithm forms the basis for a variety of tools – image retargeting, completion and reshuffling – that can be used together in the context of a high-level image editing application. Finally, we propose additional intuitive constraints on the synthesis process that offer the user a level of control unavailable in previous methods.},
   author = {Barnes, Connelly and Shechtman, Eli and Finkelstein, Adam and Goldman, Dan B},
@@ -54,5 +6,26 @@
   title = {PatchMatch: A Randomized Correspondence Algorithm for Structural Image Editing},
   volume = {28},
   year = {2009},
+  note = {1749 citations},
   url = {https://gfx.cs.princeton.edu/pubs/Barnes_2009_PAR/patchmatch.pdf}
+}
+@article{luo2016efficient,
+  abstract = {In the past year, convolutional neural networks have been shown to perform extremely well for stereo estimation. However, current architectures rely on siamese networks which exploit concatenation followed by further processing layers, requiring a minute of GPU computation per image pair. In contrast, in this paper we propose a matching network which is able to produce very accurate results in less than a second of GPU computation. Towards this goal,we exploit a product layer which simply computes the inner product between the two representations of a siamese architecture. We train our network by treating the problem as multi-class classification, where the classes are all possible disparities. This allows us to get calibrated scores, which result in much better matching performance when compared to existing approaches.},
+  author = {Luo, Wenjie and Schwing, Alexander G. and Urtasun, Raquel},
+  journal = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages = {5695-5703},
+  title = {Efficient Deep Learning for Stereo Matching},
+  year = {2016},
+  note = {291 citations},
+  url = {https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Luo_Efficient_Deep_Learning_CVPR_2016_paper.pdf}
+}
+@article{duggal2019deeppruner,
+  abstract = {Our goal is to significantly speed up the runtime of current state-of-the-art stereo algorithms to enable real-time inference. Towards this goal, we developed a differentiable PatchMatch module that allows us to discard most disparities without requiring full cost volume evaluation. We then exploit this representation to learn which range to prune for each pixel. By progressively reducing the search space and effectively propagating such information, we are able to efficiently compute the cost volume for high likelihood hypotheses and achieve savings in both memory and computation. Finally, an image guided refinement module is exploited to further improve the performance. Since all our components are differentiable, the full network can be trained end-to-end. Our experiments show that our method achieves competitive results on KITTI and SceneFlow datasets while running in real-time at 62ms.},
+  author = {Duggal, Shivam and Wang, Shenlong and Ma, Wei-Chiu and Hu, Rui and Urtasun, Raquel},
+  journal = {International Conference on Computer Vision (ICCV)},
+  pages = {4321-4330},
+  title = {DeepPruner: Learning Efficient Stereo Matching via Differentiable PatchMatch},
+  year = {2019},
+  note = {0 citations},
+  url = {http://www.cs.toronto.edu/~slwang/deeppruner.pdf}
 }

@@ -16,7 +16,12 @@
 This should be similar to introductions of the papers you are reading.  You want the reader to become interested in the general topic and describe the main challenge(s) the paper will solve.  Usually this starts out a little broad and then narrows down on a specific problem or challenge.
 
 \section{Related Work}
-This should include a substantive critique of all three selected papers.  It may be good to subdivide this section into subsections for each of the three papers as follows.
+\subsection{PatchMatch}
+Many modern image editing tools used for retargeting, completing holed, and reshuffling content rely on finding approximate nearest neighbor (ANN) matches between small image patches. Efficiently locating these nearest neighbor (NN) matches is not trivial, however, and classical approaches have required too much time and memory to be applicable in real-time image editing tools. In the article “PatchMatch: A randomized Correspondence Algorithm for Structural Image Editing,” Barnes et al. (2009) introduced a new algorithm for finding ANN matches that requires minimal memory and greatly reduces the search field for possible matches, greatly reducing the algorithm’s runtime \citep{barnes2009patchmatch}. While the introduction of PatchMatch has been shown to be effective in many image editing tools since 2009, there still exist limitations to the algorithms that have yet to be addressed, such as specific edge cases that contradict some of the assumptions made by the algorithm.
+\subsection{Efficient Deep Learning for Stereo Matching}
+Text \citep{luo2016efficient}.
+\subsection{DeepPruner}
+Text \citep{duggal2019deeppruner}.
 
 \section{Solution Approach}
 This should define and describe the algorithm you have implemented and give insight into why it works.
@@ -28,7 +33,7 @@ This will have your implementation details such as which library you used, what 
 This should include any experiments you performed and results in tabular or graph format along with clear and concise descriptions of your results.  Seek to answer the questions "Why is this interesting?" or "Why should anyone care about these results?" rather than merely describing the results or merely stating which one was better.
 
 \section{Conclusion / Discussion}
-This final section should include any thoughts, insights or possible extensions you have considered based on your implementation and/or experiments.  You could suggest future directions.  You should also summarize your main findings in a few sentences.  If your experiments seemed to fail or didn't meet your hypotheses, then you can discuss reasons why you believe your experiments didn't seem to work. \citep{luo2016efficient} \citep{yao2018mvsnet} \citep{yu2017single} \citep{duggal2019deeppruner} \citep{barnes2009patchmatch}
+This final section should include any thoughts, insights or possible extensions you have considered based on your implementation and/or experiments.  You could suggest future directions.  You should also summarize your main findings in a few sentences.  If your experiments seemed to fail or didn't meet your hypotheses, then you can discuss reasons why you believe your experiments didn't seem to work.
 
 \bibliographystyle{plain}
 \bibliography{references}
