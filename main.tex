@@ -1,39 +1,119 @@
 \documentclass{article}
+\usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 
-\title{ECE 570 Term Paper : A Review of Depth Estimation Algorithms Using Stereo Imaging}
-\author{Anonymous}
-\date{November 2019}
+\usepackage{icml2019}
 
-\usepackage{natbib}
-\usepackage{graphicx}
+\icmltitlerunning{Submission and Formatting Instructions for ICML 2019}
 
 \begin{document}
 
-\maketitle
+\twocolumn[
+\icmltitle{ECE 570 Term Paper : A Review of
+\\
+Depth Estimation Algorithms Using Stereo Imaging}
+
+\vskip 0.3in
+]
 
 \section{Motivation and Problem Setting}
-This should be similar to introductions of the papers you are reading.  You want the reader to become interested in the general topic and describe the main challenge(s) the paper will solve.  Usually this starts out a little broad and then narrows down on a specific problem or challenge.
+The ability to estimate absolute or relative depth based on stereo imagery is an ongoing issue that has ramifications in many fields such as autonomous vehicles, robotics, and image editing. Currently, most autonomous or semi-autonomous vehicles or robots rely on LiDAR, sonar, or other similar technologies to estimate depth for their environment, but these solutions often have a steep cost/performance tradeoff. Further, image and video editing tools do not have the luxury of capturing distances from wave forms and must rely on image-based depth estimations.
+
+The classical approach to solving this problem is to create a mapping between patches centered around each pixel in the left image with patches in its paired right image while minimizing some cost function, f(A, B), where A is the patch from the image, B is the patch from the right image, and f(A, B) is typically a simple sum of squared differences. The horizontal pixel disparity between paired patches A and B can then be used to calculate absolute distance between the camera and the object by using information about the distance between the two cameras and their resolutions.
+
+However, there is an issue with the classical approach. In order to guarantee the minimization of the cost function for a particular patch A, all patches B within range of possible disparities must be evaluated. This is computationally burdensome and results in runtimes that are unacceptable for most real-world applications.
+
+Therefore, the task of quicker convergence is an important one. The following paper will explore one solution for this problem which utilizes the landmark 2009 algorithm, PatchMatch \citep{barnes2009patchmatch} that quickly identifies approximate nearest-neighbors (ANNs) for patches by taking advantage of the natural structure of images and the law of large numbers.
 
 \section{Related Work}
 \subsection{PatchMatch}
-Many modern image editing tools used for retargeting, completing holed, and reshuffling content rely on finding approximate nearest neighbor (ANN) matches between small image patches. Efficiently locating these nearest neighbor (NN) matches is not trivial, however, and classical approaches have required too much time and memory to be applicable in real-time image editing tools. In the article “PatchMatch: A randomized Correspondence Algorithm for Structural Image Editing,” Barnes et al. (2009) introduced a new algorithm for finding ANN matches that requires minimal memory and greatly reduces the search field for possible matches, greatly reducing the algorithm’s runtime \citep{barnes2009patchmatch}. While the introduction of PatchMatch has been shown to be effective in many image editing tools since 2009, there still exist limitations to the algorithms that have yet to be addressed, such as specific edge cases that contradict some of the assumptions made by the algorithm.
-\subsection{Efficient Deep Learning for Stereo Matching}
-Text \citep{luo2016efficient}.
+Many modern image editing tools used for retargeting, completing holed, and reshuffling content rely on finding approximate nearest neighbor (ANN) matches between small image patches. Efficiently locating these nearest neighbor (NN) matches is not trivial, however, and classical approaches have required too much time and memory to be applicable in real-time image editing tools.
+
+In the article “PatchMatch: A randomized Correspondence Algorithm for Structural Image Editing,” Barnes et al. \citep{barnes2009patchmatch} introduced a new algorithm for finding ANN matches that requires minimal memory and greatly reduces the search field for possible matches, therefore reducing the algorithm’s runtime. While the introduction of PatchMatch has been shown to be effective in many image editing tools since 2009, there still exist limitations to the algorithms that have yet to be addressed, such as specific edge cases that contradict some of the assumptions made by the algorithm.
+
+Barnes et al. \citep{barnes2009patchmatch} set out in this paper to provide a more efficient algorithm for finding ANN matches between image patches because they believe, “the performance of these [image editing] tools must be fast enough that the user quickly sees intermediate results in the process of trial and error.” The algorithm is able to greatly reduce the disparity range for each patch by taking advantage of assumptions made about the natural structure of images and the law of large numbers, seen in their propagation and random search phases respectively.
+
+Offsets left and right patches are first randomly initialized across the uniform range of all possible disparities. Playing off the law of large numbers, Barnes et al. \citep{barnes2009patchmatch} conclude that within a patch of random offsets, “the odds of at least one offset being correctly assigned are quite good (1 – (1 – 1/M)M)) or approximately 1 – 1/e for large M, where M is equal to the patch sizes.
+
+It is assumed that within a patch, due to the natural structure of images, pixels are likely to share similar disparity values and thus good patch offsets are shared with neighboring pixels in the patch. Barnes et al. \citep{barnes2009patchmatch} state that majority of patches will converge within the first iteration, however for improved performance the propagation and random search phases can be repeated for any k number of iterations.
+
+Since being published in 2009, the PatchMatch \citep{barnes2009patchmatch} algorithm has been referenced and utilized in a multitude of different tools used to analyze and manipulate images in real time. The strength of PatchMatch lies in its ability to quickly find approximate matches for a specific patch of pixels in a given image without necessarily finding the absolute minimum cost match within the given discrepancy range.
+
+This is particularly useful in situations when approximate matches provide valuable information, such as hole filling. However, when tasked with locating specific corresponding patches within a set of images there are several cases that can trap the algorithm in local minima some distance away from the true match.
+
+One example of these edge cases is if an object in the image is particularly smooth, i.e. most pixels in the given region are close in color. Without any constraints informing the algorithm where the patch belongs relative to other patches or objects in the image, the PatchMatch algorithm \citep{barnes2009patchmatch} will have no way of discriminating against surrounding patches with identical pixels. This is because of the simplicity of the cost function that simply finds the sum of squared difference pixels within the two patches.
+
+Another example of where the PatchMatch \citep{barnes2009patchmatch} algorithm falls short is with repeated patterns. For example, on a building with many similar looking windows on a building, it is possible for the PatchMatch algorithm to get caught in a local minimum that matches one window with another surrounding window. Once again, this would still be valuable for some image editing tools, such as hole-filling, but would be impractical for locating absolute nearest neighbors between stereo images.
+
+One possible way of resolving these two edge cases would be to modify the PatchMatch \citep{barnes2009patchmatch} algorithm to provide k-ANN patches and have surrounding patches vote on which disparity is most likely to be the true match. Also, CNN classification algorithms could be used in pre-processing to maintain continuous disparities within objects.
+
+PatchMatch \citep{barnes2009patchmatch} focuses on the important task of reducing the disparity search range for ANN pixel patches so that matching can be done in real-time. This algorithm has proved quite useful for many high-level image editing tools such as retargeting, completion, and reshuffling. However, there are still some limitations to this algorithm, such as dealing with smooth or non-textured images and patterned images, that still need to be addressed by future research.
+
 \subsection{DeepPruner}
-Text \citep{duggal2019deeppruner}.
+Since its introduction in 2009, the PatchMatch algorithm \citep{barnes2009patchmatch} has inspired and been utilized in many more complex algorithms for image processing, mostly for its ability to quickly converge on local minima thus drastically reducing runtime. PatchMatch has also been used as a way of narrowing the search field of possible candidates that are evaluated by a more robust cost aggregation algorithm. However, the PatchMatch algorithm is not innately differentiable due to its dependence on the argmin function for evaluating minimum costs and has thus been left out of
+In the article “DeepPruner: Learning Efficient Stereo Matching via Differentiable PatchMatch,” Duggal et al. \citep{duggal2019deeppruner} leverage the efficiency gains of PatchMatch to develop their own end-to-end differentiable stereo algorithm that provides real-time performance. The algorithm consists of several stages, including feature extraction followed by differentiable PatchMatch used to prune the search space of disparities. The algorithm goes through then another round of differentiable PatchMatch before conducting a 3D cost volume aggregation on the predicted ranges of disparities. Lastly, the depth estimates are passed through a refinement phase that will attempt to reduce noise based on low-level feature information from the left image.
+
+In order to evaluate the performance of DeepPruner, Duggal et al. \citep{duggal2019deeppruner} compared two versions of their algorithm, “DeepPruner-Best” and “DeepPruner-Fast,” with the current best performing algorithms and real-time models respectively. The models were all compared against SceneFlow, a synthetic dataset with available ground truth disparities, as well as KITTI 2015, a collection of real-world stereo images collected along side a Velodyne HDL-64E Lidar laser scanner used to collect ground truth disparities.
+
+The results of the experiments conducted by Duggal et al. \citep{duggal2019deeppruner} show that the DeepPruner-Best algorithm was consistently running over 2x faster than all other leading algorithms while still yielding comparable End-Point-Error (EPE) values. Although DeepPruner-Fast had a runtime 3x quicker on average than DeepPruner-Best, it was running at over 60ms per frame compared to leading real-time models like MAD-Net with a runtime of 20ms.
+
+With a run-time of 60ms from DeepPruner-Best, the question can now be raised, what constitutes a true real-time algorithm? In the context of image editing software, one can assume that 60ms run-time is more than sufficient, but in the context of identifying objects in an autonomous vehicle as in the KITTI 2015 dataset, one could argue that a faster algorithm, such as MAD-Net is required. In order to reach lower run-times, more experimentation could be done on faster versions of DeepPruner that further downsample the cost volume, possibly by 16.
+
+One issue with the DeepPruner implementation of Differentiable PatchMatch lies in the omission of the random search phase. In the classical PatchMatch algorithm, each propagation phase is followed up with random samples from within the disparity search field in order to locate better possible matches and escape local minima. In their article, Duggal et al. \citep{duggal2019deeppruner} chose to omit the local random resampling in order to further simplify the algorithm which leaves the algorithm susceptible to pruning the disparity search region around local minima that do not reflect the true disparity of a patch.
+
+Although the DeepPruner algorithm \citep{duggal2019deeppruner} performed quite well against the SceneFlow and KITTI 2015 datasets, it is quite possible that their model has been overfitted for these samples that contain mostly synthetic scenes or scenes from the perspective of a car on the road. In order to further test the rigidity of the DeepPruner, more experimentation should be done against a more diverse set of stereo images.
+
+\subsection{Efficient Deep Learning for Stereo Matching}
+In recent years, much progress has been made to utilize convolutional neural networks for stereo depth estimation. Most current algorithms utilize a siamese architecture, processing both the left image and the right image through feature extracting network layers, before later concatenating the two feature volumes to be sent through further post-processing layers. This approach has proven effective, but often times requires “a minute on the GPU to process a stereo pair” \citep{luo2016efficient}.
+
+In their article titled, “Efficient Deep Learning for Stereo Matching,” Luo et al. \citep{luo2016efficient} present a novel approach to improve the efficiency of the siamese convolutional neural network architecture by simply taking the inner product between the left and right feature volumes to produce the disparity estimates. Also, Luo et al. \citep{luo2016efficient} maintained probability estimates over all possible disparities during training which allows their network to gain insights beyond simple softmax values utilized by prior approaches.
+
+To test their algorithm, Luo et al. compared their performance on the KITTI 2012 and 2015 benchmark datasets against state-of-the-art algorithms such as MBM [10], SPS-St [28], MC-CNN [31], and Displets v2 [13]. The results of their experiments show that their algorithm was able to achieve comparable error rates against the KITTI 2012 and 2015 datasets while showing significant decreases in runtime. However, after performing post-processing to each algorithm, Luo et al.’s approach was unable to match the error levels produced by state-of-the-art algorithms
+
+One issue that Luo et al. \citep{luo2016efficient} faced when comparing their algorithm with the current state-of-the-art algorithms was that most of the current smoothing techniques used for post processing are tailored to traditional approach of concatenating the siamese networks and applying further network layers. Luo et al. made some attempts at smoothing their output, utilizing slanted-plane estimates [] and other sophisticated post-processing techniques to resolve conflicts between left and right image disparity estimates. However, despite outperforming all state-of-the-art algorithms in runtime and error performance prior to smoothing, Luo et al.’s algorithm falls short after post-processing.
+
+As common with many stereo matching algorithms, Luo et al.’s algorithm \citep{luo2016efficient} also fails to give accurate estimates for matching smooth patches or patches with repeated patterns. This is a difficult task to solve and often requires more computation during preprocessing and postprocessing. One could also argue that the Luo et al.’s failure amongst smooth and patterned patches may stem from the information lost at the combination phase of their siamese networks through inner product instead of concatenation.
+
+Although there exist limitations to their algorithm in its current state, Luo et al. \citep{luo2016efficient} present a novel approach to solving the issue of stereo depth estimation using convolutional neural networks. Luo et al. added to existing work [] by constructing probability distributions for each patch over all possible disparities, allowing inferences to be drawn between several disparities for a given patch.
+
+The team also rethought the traditional way of concatenating the siamese architecture between the right and left images by simply taking the inner product between the two. Luo et al. \citep{luo2016efficient} provided novel and valuable additions to the discussion of stereo image depth estimation and more research must be done as a result of their article in order to further improve its performance amongst edge cases.
 
 \section{Solution Approach}
-This should define and describe the algorithm you have implemented and give insight into why it works.
+
+The objective of this section is to describe the algorithm that I implemented and explain its rational. My algorithm applies the notable PatchMatch algorithm \citep{patchmatch} in the context of disparity estimation using stereo imaging similar to what was done in the DeepPruner algorithm \citep{deeppruner}. Instead of using PatchMatch twice in order to narrow the search field of possible disparities, my algorithm only runs PatchMatch once while still including the random search phase in order to preserve the efficacy of escaping local minima.
+
+\subsection{DeepPruner Solution}
+The DeepPruner algorithm also contains several other elements that improve its performance that I was unable to implement due to hardware constraints. The full DeepPruner algorithm, shown in Figure 1, consists of feature extraction, pruning through differentiable patch match, and cost aggregate refinement phases that are all differentiable allowing for end-to-end learning. I will first explain how the solution approach to the full DeepPruner algorithm before talking specifically about my approach.
+
+\textbf{Feature Extraction} The DeepPruner algorithm starts with a 2D convolutional neural network linked to a spatial pyramid pooling module that utilizes shared parameters to create a feature volume representation for every pixel in the left image and the right image. By using residual blocks and spatial pyramid pooling the pre-processing phase is able to extract global feature information without losing resolution. The design of this CNN pre-processing phase is out of the scope of this paper but was modeled off of the following papers [][][][].
+
+\textbf{Differentiable Patch Match} As discussed in section 2.1, PatchMatch was a pivotal algorithm used to quickly locate approximate near neighbor patches within an image or between two images. However, the PatchMatch algorithm as it was originally presented in 2006 relies on many random offset probes used in the random search phase which can be computationally burdensome, and it determines which offsets to push forward by utilizing the non-differentiable arg max algorithm.
+
+DeepPruner presents a differentiable version of PatchMatch that removes the random search phase and replaces the arg max function with the soft version in order to maintain differentiability. Also, in the propagation phase instead of alternating propagation from top left to bottom right and from bottom right to top left, the differentiable patchmatch algorithm presented by Duggal et al. utilizes one-hot filter banks for all four surrounding pixels (see Figure 2).
+
+\textbf{Confidence Range Prediction} The confidence range prediction phase of the DeepPruner algorithm exploits a convolutional encoder-decoder network structure in order to narrow the search range of likely disparities for each patch. The network takes the density estimations from the initialization and propagation phase of the differentiable patch match layer and produces a confidence range of disparities, Ri = [li, ui], for each pixel i.
+
+\textbf{3D Cost Aggregation} Using the reduced disparity range produced by the confidence range prediction layer, a 3D cost analysis is done on every disparity and the soft arg max algorithm again used to evaluate the best disparity.
+
+\textbf{Refinement} In the refining layer, the best disparity values for each pixel are passed into a “lightweight fully convolutional refinement network” that improves the performance of the algorithm by also considering the feature information extracted by the first layer of the algorithm.  This layer serves to reduce noise within objects that may be smooth or contain repeated patterns.
+
+\subsection{My Solution}
+The first assumption I made was that the stereo images being fed into the algorithm have been rectified through preprocessing that have normalized their colors and aligned objects along the vertical plane. This important assumption greatly reduces the cost volume of my algorithm by reducing the disparity range to a 3D array along the same row of any given pixel.
+
+Disparities for each pixel in the left image are chosen by locating the cost minimizing disparity between a 7x7 pixel patch surrounding the pixel and corresponding pixel patches in the right image within the disparity range. For example, the cost distance function, f (A, B), between patch A in the left image and patch B in the right image is calculated by doing a simple sum of squares between the pixel information in each of the two patches.
+
+\textbf{Initialization} In the initialization phase I start by running a convolutional pooling algorithm on each image to initialize what will be considered the patch for each pixel. Then, for each patch in the left image, a random offset between 0 and 50 pixels uniformly.
+
+\textbf{Propagation} During each iteration, good guesses from the initialization or random search phase are propagated to each pixel’s right and bottom neighbor (or top and left neighbor for even iterations). Each of the three disparities are translated into right image patches and run through a negative log sum of squares cost function with the left patch. The arg max function is used to assign the new lowest cost disparity.
+
+\textbf{Random Search} The random search phase operates similarly to the propagation phase, but instead of using neighboring offsets a random offset is selected and compared to the current offset within a decreasing radius around the current best disparity. For this algorithm I started with a disparity range of 50 that is halved after each random search.
 
 \section{Implementation}
-This will have your implementation details such as which library you used, what was the high-level structure of your program, and/or what are the core computational aspects considered in your implementation.  This should also include a discussion of comparison to other code that is available for the method you implemented and how your code differs.
+The following will describe in detail how I implemented my stereo depth estimation algorithm using differentiable PatchMatch. The algorithm was written in Python and utilizes Numpy 1.17.3 and Matplotlib 3.0.2.
 
 \section{Evaluation / Experiments}
-This should include any experiments you performed and results in tabular or graph format along with clear and concise descriptions of your results.  Seek to answer the questions "Why is this interesting?" or "Why should anyone care about these results?" rather than merely describing the results or merely stating which one was better.
 
 \section{Conclusion / Discussion}
-This final section should include any thoughts, insights or possible extensions you have considered based on your implementation and/or experiments.  You could suggest future directions.  You should also summarize your main findings in a few sentences.  If your experiments seemed to fail or didn't meet your hypotheses, then you can discuss reasons why you believe your experiments didn't seem to work.
 
 \bibliographystyle{plain}
 \bibliography{references}
