@@ -2,121 +2,68 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-# Start a timer
-tic = time.process_time()
+INTMIN = -99999999
 
-# Read the two images
-left = plt.imread('left.png')
-right = plt.imread('right.png')
 
-# Convert the images from RGB to grayscale by
-# averaging the three color channels.
-leftI = np.mean(left, axis=2)
-rightI = np.mean(right, axis=2)
+class PatchMatch:
+    def __init__(self, left_path='left.png', right_path='right.png'):
+        self.disparity_range = 55
 
-# DbasicSubpixel will hold the result of the block matching.
-# The values will be 'single' precision (32-bit) floating point.
-DbasicSubpixel = np.zeros(np.shape(leftI), dtype='float32')
+        self.left = plt.imread(left_path)
+        self.right = plt.imread(right_path)
 
-# The disparity range defines how many pixels away from the block's location
-# in the first image to search for a matching block in the other image.
-# 50 appears to be a good value for the 450x375 images from the "Cones"
-# dataset.
-disparityRange = 50
+        self.left_patches, self.right_patches = self.get_patches()
+        self.imgHeight, self.imgWidth, _, _, _ = self.left_patches.shape
+        self.offsets = self.initialize_offsets()
 
-# Define the size of the blocks for block matching.
-halfBlockSize = 3
-blockSize = 2 * halfBlockSize + 1
+    def get_patches(self):
+        height, width, depth = self.left.shape
+        left_patches = np.zeros((height - 6, width - 6, 7, 7, depth))
+        right_patches = np.zeros((height - 6, width - 6, 7, 7, depth))
+        for x in range(3, height - 3):
+            for y in range(3, width - 3):
+                left_patches[x - 3][y - 3] = self.left[x - 3:x + 4, y - 3:y + 4, :]
+                right_patches[x - 3][y - 3] = self.right[x - 3:x + 4, y - 3:y + 4, :]
+        return left_patches, right_patches
 
-# Get the image dimensions.
-imgHeight, imgWidth = np.shape(leftI)
+    def initialize_offsets(self):
+        offsets = np.zeros((self.imgHeight, self.imgWidth), dtype=int)
+        return offsets
 
-# For each row 'm' of pixels in the image...
-for m in range(imgHeight):
+    def patch_distance_error(self, x, y, offset):
+        if y+offset >= self.imgWidth:
+            return INTMIN
+        right_patch = self.right_patches[x][y]
+        left_patch = self.left_patches[x][y+offset]
+        distance_error = -np.log(np.sum(np.abs(right_patch-left_patch)))
+        return distance_error
 
-    # Set min / max row bounds for the template and blocks.
-    # e.g., for the first row, minr = 0 and maxr = 3
-    minr = max(0, m - halfBlockSize)
-    maxr = min(imgHeight-1, m + halfBlockSize)
+    def visualize(self, outfile='classicStereo2.png'):
+        plt.imshow(self.offsets[:, :-self.disparity_range], cmap="inferno")
+        plt.savefig(outfile)
 
-    # For each column 'n' of pixels in the image...
-    for n in range(imgWidth):
-        # Set the min / max column bounds for the template.
-        # e.g., for the first column, minc = 1 and maxc = 4
-        minc = max(0, n - halfBlockSize)
-        maxc = min(imgHeight-1, n + halfBlockSize)
+    def train(self):
+        for x, row in enumerate(self.offsets):
+            for y, _ in enumerate(row[:-self.disparity_range]):
+                distances = np.zeros(self.disparity_range)
+                for offset, _ in enumerate(distances):
+                    distances[offset] = self.patch_distance_error(x, y, offset)
+                self.offsets[x][y] = np.argmax(distances)
+            if x % 10 == 0:
+                print("  Image row {0:d} / {1:d}".format(x, self.imgHeight))
 
-        # Define the search boundaries as offsets from the template location.
-        # Limit the search so that we don't go outside of the image.
-        # 'mind' is the the maximum number of pixels we can search to the left.
-        # 'maxd' is the maximum number of pixels we can search to the right.
-        #
-        # In the "Cones" dataset, we only need to search to the right, so mind
-        # is 0.
-        #
-        # For other images which require searching in both directions, set mind
-        # as follows:
-        #   mind = max(-disparityRange, 1 - minc);
-        mind = 0
-        maxd = min(disparityRange, imgWidth - maxc)
 
-        # Select the block from the right image to use as the template.
-        template = rightI[minr:maxr+1, minc:maxc+1]
+if __name__ == "__main__":
+    # Start a timer
+    tic = time.process_time()
 
-        # Get the number of blocks in this search.
-        numBlocks = maxd - mind + 1
+    # Calculate Map
+    patch_match = PatchMatch()
+    patch_match.train()
 
-        # Create a vector to hold the block differences.
-        blockDiffs = np.zeros(numBlocks)
+    # Display compute time.
+    toc = time.process_time()
 
-        # Calculate the difference between the template and each of the blocks.
-        for i, d in enumerate(range(mind, maxd+1)):
-
-            # Select the block from the left image at the distance 'i'.
-            block = leftI[minr:maxr+1, minc+d:maxc+d+1]
-
-            # Take the sum of absolute differences(SAD) between the template
-            # and the block and store the resulting value.
-            blockDiffs[i] = sum(sum(abs(template - block)))
-
-        # Sort the SAD values to find the closest match(smallest difference).
-        # Discard the sorted vector(the "~" notation), we just want the list
-        # of indices.
-        #
-        # Get the index of the closest - matching block.
-        bestMatchIndex = np.argmin(blockDiffs)
-
-        # Convert the index of this block back into an offset.
-        # This is the final disparity value produced by basic block matching.
-        d = bestMatchIndex + mind - 1
-
-        # Calculate a sub - pixel estimate of the disparity by interpolating.
-        # Sub - pixel estimation requires a block to the left and right, so we
-        # skip it if the best matching block is at either edge of the search
-        # window.
-        if bestMatchIndex == 0 or bestMatchIndex == numBlocks-1:
-            # Skip sub - pixel estimation and store the initial disparity value.
-            DbasicSubpixel[m, n] = d
-        else:
-            # Grab the SAD values at the closest matching block(C2) and it's
-            # immediate neighbors(C1 and C3).
-            C1 = blockDiffs[bestMatchIndex - 1]
-            C2 = blockDiffs[bestMatchIndex]
-            C3 = blockDiffs[bestMatchIndex + 1]
-
-            # Adjust the disparity by some fraction.
-            # We're estimating the subpixel location of the true best match.
-            DbasicSubpixel[m, n] = d - (0.5 * (C3 - C1) / (C1 - (2 * C2) + C3))
-
-    # Update progress every 10th row.
-    if m % 10 == 0:
-        print("  Image row {0:d} / {1:d} {2:.2f}%".format(m, imgHeight, (m / imgHeight) * 100))
-
-# Display compute time.
-toc = time.process_time()
-elapsed = toc - tic
-print("Calculating disparity map took {0:.2f} min.\n".format(elapsed / 60.0))
-
-# Display the Disparity Map
-plt.imshow(DbasicSubpixel, cmap="inferno")
-plt.savefig('classicStereo.png', )
+    patch_match.visualize()
+    elapsed = toc - tic
+    print("Calculating disparity map took {0:.2f} min.\n".format(elapsed / 60.0))
