@@ -7,7 +7,7 @@ INTMIN = -99999999
 class DisparityAlg:
     def __init__(self, left_path='left.png', right_path='right.png', outfile="output.png"):
         self.outfile = outfile
-        self.disparity_range = 55
+        self.disparity_range = 100
 
         self.left = plt.imread(left_path)
         self.right = plt.imread(right_path)
@@ -31,7 +31,7 @@ class DisparityAlg:
             return INTMIN
         right_patch = self.right_patches[x][y]
         left_patch = self.left_patches[x][y+offset]
-        distance_error = -np.log(np.sum(np.square(right_patch-left_patch)))
+        distance_error = -np.sum(np.square(right_patch-left_patch))
         return distance_error
 
     def visualize(self):

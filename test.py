@@ -5,7 +5,7 @@ from patchMatch import PatchMatch
 
 def test_classic():
     tic = time.process_time()
-    classic_Stereo = ClassicStereo()
+    classic_Stereo = ClassicStereo(left_path="left_sceneflow.png", right_path="right_sceneflow.png")
     classic_Stereo.train()
     toc = time.process_time()
     classic_Stereo.visualize()
@@ -14,7 +14,8 @@ def test_classic():
 
 def test_patch_match(iterations):
     tic = time.process_time()
-    patch_match = PatchMatch(outfile="patchMatch" + str(iterations) + ".png")
+    patch_match = PatchMatch(left_path="left_sceneflow.png", right_path="right_sceneflow.png",
+                             outfile="patchMatch" + str(iterations) + ".png")
     patch_match.train(iterations)
     toc = time.process_time()
     patch_match.visualize()
@@ -22,7 +23,7 @@ def test_patch_match(iterations):
 
 
 if __name__ == "__main__":
-    test_classic()
     test_patch_match(1)
     test_patch_match(2)
     test_patch_match(5)
+    test_classic()

@@ -6,7 +6,7 @@ INTMIN = -99999999
 
 
 class PatchMatch(DisparityAlg):
-    def __init__(self, left_path='left.png', right_path='right.png', outfile='patchMatch.png'):
+    def __init__(self, left_path, right_path, outfile='patchMatch.png'):
         super().__init__(left_path=left_path, right_path=right_path, outfile=outfile)
         self.offsets = self.initialize_offsets()
         self.best_distances = self.initialize_distances()
@@ -75,8 +75,8 @@ class PatchMatch(DisparityAlg):
 if __name__ == "__main__":
     tic = time.process_time()
 
-    patch_match = PatchMatch()
-    patch_match.train(2)
+    patch_match = PatchMatch(left_path="left_floating.png", right_path="right_floating.png")
+    patch_match.train(5)
 
     toc = time.process_time()
 
