@@ -3,22 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="6284e3b7-6b67-4281-b64e-b0ef16a8ad25" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ECE_570_Term_Paper.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/article/ECE_570_Term_Paper.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figure1.png" beforeDir="false" afterPath="$PROJECT_DIR$/article/figures/Figure1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figure2.png" beforeDir="false" afterPath="$PROJECT_DIR$/article/figures/Figure2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TermPaper.docx" beforeDir="false" afterPath="$PROJECT_DIR$/article/TermPaper.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classicStereo.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/classicStereo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classicStereo.py" beforeDir="false" afterPath="$PROJECT_DIR$/classicStereo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disparityAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/disparityAlg.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/experiments.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icml2018.bst" beforeDir="false" afterPath="$PROJECT_DIR$/article/icml2018.bst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icml2019.sty" beforeDir="false" afterPath="$PROJECT_DIR$/article/icml2019.sty" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.tex" beforeDir="false" afterPath="$PROJECT_DIR$/article/main.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/classicStereo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/patchMatch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/patchMatch1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/patchMatch2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/patchMatch5.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/patchMatch.py" beforeDir="false" afterPath="$PROJECT_DIR$/patchMatch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch1.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/patchMatch1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch2.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/patchMatch2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch5.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/patchMatch5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/references.bib" beforeDir="false" afterPath="$PROJECT_DIR$/article/references.bib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/left/floating.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/right/floating.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,21 +36,23 @@
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DeepPruner" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\source\monkaa\right" />
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\source\monkaa\left" />
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output\monkaa" />
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output\driving" />
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output\flying_objects" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output\flying_objects\patchmatch1" />
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\source\flying_objects\left" />
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\source\flying_objects" />
       <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\article" />
       <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\figures" />
-      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output" />
-      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\source\right" />
-      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\source\left" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision" />
-      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\source" />
-      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\Stereo Tutorial" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -70,7 +67,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.patchMatch">
+  <component name="RunManager" selected="Python.experiments">
     <configuration name="classicStereo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Stereo Tutorial" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -185,10 +182,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.experiments" />
         <item itemvalue="Python.patchMatch" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.disparityAlg" />
-        <item itemvalue="Python.experiments" />
         <item itemvalue="Python.classicStereo" />
       </list>
     </recent_temporary>
@@ -302,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573450728043</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Organized files">
+      <created>1573451344829</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1573451344829</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -333,6 +337,7 @@
     <MESSAGE value="improvements" />
     <MESSAGE value="Rough Draft Done" />
     <MESSAGE value="Actual Rough Draft Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Actual Rough Draft Done" />
+    <MESSAGE value="Organized files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Organized files" />
   </component>
 </project>

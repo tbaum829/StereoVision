@@ -5,9 +5,9 @@ INTMIN = -99999999
 
 
 class DisparityAlg:
-    def __init__(self, left_path='left.png', right_path='right.png', outfile="output.png"):
+    def __init__(self, left_path, right_path, outfile, disparity_range):
         self.outfile = outfile
-        self.disparity_range = 100
+        self.disparity_range = disparity_range
 
         self.left = plt.imread(left_path)
         self.right = plt.imread(right_path)

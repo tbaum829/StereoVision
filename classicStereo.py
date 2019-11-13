@@ -6,8 +6,8 @@ INTMIN = -99999999
 
 
 class ClassicStereo(DisparityAlg):
-    def __init__(self, left_path, right_path, outfile="output/classicStereo.png"):
-        super().__init__(left_path=left_path, right_path=right_path, outfile=outfile)
+    def __init__(self, left_path, right_path, outfile, disparity_range):
+        super().__init__(left_path=left_path, right_path=right_path, outfile=outfile, disparity_range=disparity_range)
         self.offsets = self.initialize_offsets()
 
     def initialize_offsets(self):
@@ -25,7 +25,10 @@ class ClassicStereo(DisparityAlg):
 
 if __name__ == "__main__":
     tic = time.process_time()
-    classic_stereo = ClassicStereo(left_path="source/left/floating.png", right_path="source/right/floating.png")
+    classic_stereo = ClassicStereo(left_path="source/flying_objects/left/1001.png",
+                                   right_path="source/flying_objects/right/1001.png",
+                                   outfile="output/flying_objects/classic/1001.png",
+                                   disparity_range=100)
     classic_stereo.train()
     toc = time.process_time()
     classic_stereo.visualize()
