@@ -39,7 +39,7 @@ class PatchMatch:
         left_distance = self.patch_distance_error(x, y, left_offset)
         distance_errors = [current_distance, above_distance, left_distance]
         offset_args = [current_offset, above_offset, left_offset]
-        best_index = int(np.argmax(distance_errors))
+        best_index = int(np.argmin(distance_errors))
         self.offsets[x][y] = offset_args[best_index]
         self.best_distances[x][y] = distance_errors[best_index]
 
@@ -52,14 +52,14 @@ class PatchMatch:
         right_distance = self.patch_distance_error(x, y, right_offset)
         distance_errors = [current_distance, below_distance, right_distance]
         offset_args = [current_offset, below_offset, right_offset]
-        best_index = int(np.argmax(distance_errors))
+        best_index = int(np.argmin(distance_errors))
         self.offsets[x][y] = offset_args[best_index]
         self.best_distances[x][y] = distance_errors[best_index]
 
     def random_search(self, x, y, offset):
         current_distance = self.best_distances[x][y]
         new_distance = self.patch_distance_error(x, y, offset)
-        if current_distance < new_distance:
+        if current_distance > new_distance:
             self.offsets[x][y] = offset
             self.best_distances[x][y] = new_distance
 
@@ -94,7 +94,7 @@ class PatchMatch:
             return INTMIN
         right_patch = self.right_patches[x][y]
         left_patch = self.left_patches[x][y+offset]
-        distance_error = -np.sum(np.square(right_patch-left_patch))
+        distance_error = np.sum(np.square(right_patch-left_patch))
         return distance_error
 
     def visualize(self):

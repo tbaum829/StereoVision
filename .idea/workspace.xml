@@ -4,27 +4,12 @@
     <list default="true" id="6284e3b7-6b67-4281-b64e-b0ef16a8ad25" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/article/TermPaper.docx" beforeDir="false" afterPath="$PROJECT_DIR$/article/TermPaper.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/article/figures/Experiment.png" beforeDir="false" afterPath="$PROJECT_DIR$/article/figures/Experiment.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/article/figures/Figure1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/article/figures/Figure2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/article/~WRL0005.tmp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/classicStereo.py" beforeDir="false" afterPath="$PROJECT_DIR$/classicStereo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/disparityAlg.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/driving/patchmatch1/0001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch1/0001.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch1/0002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch1/0002.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch1/0003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch1/0003.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch2/0001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch2/0001.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch2/0002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch2/0002.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch2/0003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch2/0003.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch5/0001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch5/0001.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch5/0002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch5/0002.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch5/0003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch5/0003.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1001.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1002.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1003.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1001.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1002.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1003.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1001.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1002.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1003.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patchMatch.py" beforeDir="false" afterPath="$PROJECT_DIR$/patchMatch.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -79,7 +64,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.experiments">
+  <component name="RunManager" selected="Python.classicStereo">
     <configuration name="classicStereo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Stereo Tutorial" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -194,8 +179,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.experiments" />
         <item itemvalue="Python.classicStereo" />
+        <item itemvalue="Python.experiments" />
         <item itemvalue="Python.diffPatchMatch" />
         <item itemvalue="Python.patchMatch" />
         <item itemvalue="Python.diffHelper" />
@@ -325,7 +310,21 @@
       <option name="project" value="LOCAL" />
       <updated>1573666850579</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="add differential patch match to the mix">
+      <created>1573752577366</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1573752577367</updated>
+    </task>
+    <task id="LOCAL-00018" summary="add files">
+      <created>1573752608581</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1573752608581</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -358,6 +357,8 @@
     <MESSAGE value="Actual Rough Draft Done" />
     <MESSAGE value="Organized files" />
     <MESSAGE value="If all fails use this commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="If all fails use this commit" />
+    <MESSAGE value="add differential patch match to the mix" />
+    <MESSAGE value="add files" />
+    <option name="LAST_COMMIT_MESSAGE" value="add files" />
   </component>
 </project>

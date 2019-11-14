@@ -28,7 +28,7 @@ class ClassicStereo:
                 distances = np.zeros(self.disparity_range)
                 for offset in range(self.disparity_range):
                     distances[offset] = self.patch_distance_error(x, y, offset)
-                self.offsets[x][y] = np.argmax(distances)
+                self.offsets[x][y] = np.argmin(distances)
 
     def get_patches(self):
         height, width, depth = self.left.shape
@@ -45,7 +45,7 @@ class ClassicStereo:
             return INTMIN
         right_patch = self.right_patches[x][y]
         left_patch = self.left_patches[x][y+offset]
-        distance_error = -np.sum(np.square(right_patch-left_patch))
+        distance_error = np.sum(np.square(right_patch-left_patch))
         return distance_error
 
     def visualize(self):
