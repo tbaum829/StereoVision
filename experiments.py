@@ -1,29 +1,37 @@
 import time
-from classicStereo import ClassicStereo
-from patchMatch import PatchMatch
+import classicStereo
+import patchMatch
+import diffPatchMatch
 import os
 
 
 def test_classic(left_path, right_path, outfile, disparity_range):
     tic = time.process_time()
-    classic_Stereo = ClassicStereo(left_path=left_path, right_path=right_path,
-                                   outfile=outfile, disparity_range=disparity_range)
-    classic_Stereo.train()
+    classicStereo.main(left_path=left_path, right_path=right_path,
+                       outfile=outfile, disparity_range=disparity_range)
     toc = time.process_time()
-    classic_Stereo.visualize()
-    scene = outfile.split("/")[1]
-    print("Classic Stereo Runtime ( " + scene + " ): " + str(toc-tic))
+    file = outfile.split("/")[-1]
+    print("Classic Stereo Runtime (" + file + "): " + str(toc-tic))
 
 
 def test_patch_match(left_path, right_path, outfile, disparity_range, iterations):
     tic = time.process_time()
-    patch_match = PatchMatch(left_path=left_path, right_path=right_path,
-                             outfile=outfile, disparity_range=disparity_range)
-    patch_match.train(iterations)
+    patchMatch.main(left_path=left_path, right_path=right_path,
+                    outfile=outfile, disparity_range=disparity_range,
+                    iterations=iterations)
     toc = time.process_time()
-    patch_match.visualize()
-    scene = outfile.split("/")[1]
-    print("PatchMatch Runtime ( " + str(iterations) + " iter) ( " + scene + " ): " + str(toc-tic))
+    file = outfile.split("/")[-1]
+    print("PatchMatch Runtime (" + str(iterations) + " iter) (" + file + "): " + str(toc-tic))
+
+
+def test_diff_patch_match(left_path, right_path, outfile, disparity_range, iterations):
+    tic = time.process_time()
+    diffPatchMatch.main(left_path=left_path, right_path=right_path,
+                        outfile=outfile, disparity_range=disparity_range,
+                        iterations=iterations)
+    toc = time.process_time()
+    file = outfile.split("/")[-1]
+    print("Differential PatchMatch Runtime (" + str(iterations) + " iter) (" + file + "): " + str(toc-tic))
 
 
 if __name__ == "__main__":
@@ -44,6 +52,15 @@ if __name__ == "__main__":
             outfile = "output/" + scene + "/patchmatch5/" + left
             test_patch_match(left_path=left_path, right_path=right_path,
                              outfile=outfile, disparity_range=disparity_range, iterations=5)
+            outfile = "output/" + scene + "/diffpatchmatch1/" + left
+            test_diff_patch_match(left_path=left_path, right_path=right_path,
+                                  outfile=outfile, disparity_range=disparity_range, iterations=1)
+            outfile = "output/" + scene + "/diffpatchmatch2/" + left
+            test_diff_patch_match(left_path=left_path, right_path=right_path,
+                                  outfile=outfile, disparity_range=disparity_range, iterations=2)
+            outfile = "output/" + scene + "/diffpatchmatch5/" + left
+            test_diff_patch_match(left_path=left_path, right_path=right_path,
+                                  outfile=outfile, disparity_range=disparity_range, iterations=5)
             outfile = "output/" + scene + "/classic/" + left
             test_classic(left_path=left_path, right_path=right_path,
                          outfile=outfile, disparity_range=disparity_range)

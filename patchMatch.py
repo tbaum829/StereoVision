@@ -1,13 +1,21 @@
 import numpy as np
 import time
-from disparityAlg import DisparityAlg
+import matplotlib.pyplot as plt
 
 INTMIN = -99999999
 
 
-class PatchMatch(DisparityAlg):
+class PatchMatch:
     def __init__(self, left_path, right_path, outfile, disparity_range):
-        super().__init__(left_path=left_path, right_path=right_path, outfile=outfile, disparity_range=disparity_range)
+        self.outfile = outfile
+        self.disparity_range = disparity_range
+
+        self.left = plt.imread(left_path)
+        self.right = plt.imread(right_path)
+
+        self.left_patches, self.right_patches = self.get_patches()
+        self.height = self.right_patches.shape[0]
+        self.width = self.right_patches.shape[1]-self.disparity_range
         self.offsets = self.initialize_offsets()
         self.best_distances = self.initialize_distances()
 
@@ -71,17 +79,43 @@ class PatchMatch(DisparityAlg):
                     propagate_function(x, y)
                     self.random_search(x, y, random_offsets[x][y])
 
+    def get_patches(self):
+        height, width, depth = self.left.shape
+        left_patches = np.zeros((height - 6, width - 6, 7, 7, depth))
+        right_patches = np.zeros((height - 6, width - 6, 7, 7, depth))
+        for x in range(3, height - 3):
+            for y in range(3, width - 3):
+                left_patches[x - 3][y - 3] = self.left[x - 3:x + 4, y - 3:y + 4, :]
+                right_patches[x - 3][y - 3] = self.right[x - 3:x + 4, y - 3:y + 4, :]
+        return left_patches, right_patches
+
+    def patch_distance_error(self, x, y, offset):
+        if y+offset >= self.right_patches.shape[1]:
+            return INTMIN
+        right_patch = self.right_patches[x][y]
+        left_patch = self.left_patches[x][y+offset]
+        distance_error = -np.sum(np.square(right_patch-left_patch))
+        return distance_error
+
+    def visualize(self):
+        plt.imshow(self.offsets, cmap="inferno")
+        plt.savefig(self.outfile)
+
+
+def main(left_path, right_path, outfile, disparity_range, iterations):
+    patch_match = PatchMatch(left_path=left_path,
+                             right_path=right_path,
+                             outfile=outfile,
+                             disparity_range=disparity_range)
+    patch_match.train(iterations)
+    patch_match.visualize()
+
 
 if __name__ == "__main__":
     tic = time.process_time()
-
-    patch_match = PatchMatch(left_path="source/flying_objects/left/1001.png",
-                             right_path="source/flying_objects/right/1001.png",
-                             outfile="output/flying_objects/patchmatch2/1001.png",
-                             disparity_range=100)
-    patch_match.train(2)
-
+    main(left_path="source/flying_objects/left/1001.png",
+         right_path="source/flying_objects/right/1001.png",
+         outfile="output/flying_objects/patchmatch2/1001.png",
+         disparity_range=100, iterations=2)
     toc = time.process_time()
-
-    patch_match.visualize()
-    print("Runtime:", toc-tic)
+    print("PatchMatch Runtime ( 2 iter) ( flying_objects ): " + str(toc-tic))

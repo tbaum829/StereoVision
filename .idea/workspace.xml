@@ -3,17 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="6284e3b7-6b67-4281-b64e-b0ef16a8ad25" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/article/TermPaper.docx" beforeDir="false" afterPath="$PROJECT_DIR$/article/TermPaper.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classicStereo.py" beforeDir="false" afterPath="$PROJECT_DIR$/classicStereo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/disparityAlg.py" beforeDir="false" afterPath="$PROJECT_DIR$/disparityAlg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disparityAlg.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/experiments.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/classicStereo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/patchMatch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/patchMatch1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/patchMatch2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/patchMatch5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch1/0001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch1/0001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch1/0002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch1/0002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch1/0003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch1/0003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch2/0001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch2/0001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch2/0002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch2/0002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch2/0003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch2/0003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch5/0001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch5/0001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch5/0002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch5/0002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch5/0003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch5/0003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch1/1003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch2/1003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1002.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1003.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/flying_objects/patchmatch5/1003.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patchMatch.py" beforeDir="false" afterPath="$PROJECT_DIR$/patchMatch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/left/floating.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/right/floating.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,16 +48,16 @@
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DeepPruner" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision" />
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output\flying_objects" />
+      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output\driving" />
       <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\source\monkaa\right" />
       <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\source\monkaa\left" />
-      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output\monkaa" />
-      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output\driving" />
-      <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output\flying_objects" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Tyler Baumgartner\Desktop\Academic\ECE 570\StereoVision\output\flying_objects\patchmatch1" />
@@ -89,7 +101,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="disparityAlg" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="diffHelper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Stereo Tutorial" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -101,7 +113,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/disparityAlg.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/diffHelper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="diffPatchMatch" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Stereo Tutorial" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/diffPatchMatch.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -152,41 +185,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Stereo Tutorial" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.classicStereo" />
       <item itemvalue="Python.experiments" />
       <item itemvalue="Python.patchMatch" />
-      <item itemvalue="Python.test" />
-      <item itemvalue="Python.disparityAlg" />
+      <item itemvalue="Python.diffPatchMatch" />
+      <item itemvalue="Python.diffHelper" />
+      <item itemvalue="Python.classicStereo" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.experiments" />
-        <item itemvalue="Python.patchMatch" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.disparityAlg" />
         <item itemvalue="Python.classicStereo" />
+        <item itemvalue="Python.diffPatchMatch" />
+        <item itemvalue="Python.patchMatch" />
+        <item itemvalue="Python.diffHelper" />
       </list>
     </recent_temporary>
   </component>
@@ -306,7 +318,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573451344829</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="If all fails use this commit">
+      <created>1573666850579</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1573666850579</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -338,6 +357,7 @@
     <MESSAGE value="Rough Draft Done" />
     <MESSAGE value="Actual Rough Draft Done" />
     <MESSAGE value="Organized files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Organized files" />
+    <MESSAGE value="If all fails use this commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="If all fails use this commit" />
   </component>
 </project>
