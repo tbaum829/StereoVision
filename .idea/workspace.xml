@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6284e3b7-6b67-4281-b64e-b0ef16a8ad25" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/article/TermPaper.docx" beforeDir="false" afterPath="$PROJECT_DIR$/article/TermPaper.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/article/figures/Experiment.png" beforeDir="false" afterPath="$PROJECT_DIR$/article/figures/Experiment.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/article/figures/Figure1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/article/figures/Figure2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/article/~WRL0005.tmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classicStereo.py" beforeDir="false" afterPath="$PROJECT_DIR$/classicStereo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/driving/patchmatch1/0001.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/driving/patchmatch1/0001.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patchMatch.py" beforeDir="false" afterPath="$PROJECT_DIR$/patchMatch.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -324,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573752608581</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="add readme">
+      <created>1573773784931</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1573773784931</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -359,6 +358,7 @@
     <MESSAGE value="If all fails use this commit" />
     <MESSAGE value="add differential patch match to the mix" />
     <MESSAGE value="add files" />
-    <option name="LAST_COMMIT_MESSAGE" value="add files" />
+    <MESSAGE value="add readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="add readme" />
   </component>
 </project>
